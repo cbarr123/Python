@@ -1,3 +1,23 @@
+## Business Class Definition
+class Business:
+  def __init__(self, name, franchises):
+    self.name = name
+    self.franchises = franchises
+
+## Franchise Class Definition ##
+class Franchise:
+  def __init__(self, address, menus):
+    self.address = address
+    self.menus = menus
+  def __repr__(self):
+    return self.address
+
+  def available_menus(self, time):
+    available_menus = []
+    for menu in self.menus:
+      if time >= menu.start_time and time <= menu.end_time:
+        available_menus.append(menu) 
+    return available_menus 
 
 ## Menu Class Definition ##
 class Menu:
@@ -36,10 +56,27 @@ early_bird_menu = Menu("Early Bird", earlybird_items, 1500, 1800)
 dinner_menu = Menu("Dinner", dinner_items, 1700, 2300)
 kids_menu = Menu("Kids", kids_items, 1100, 2100 )
 
+## Creating Franchises and Menu List
+menus = [brunch_menu, early_bird_menu, dinner_menu, kids_menu]
+flagship_store = Franchise("1232 West End Road", menus)
+new_installment = Franchise("12 East Mulberry Street", menus)
 
+## Creating the Basta Business
+Basta = Business("Basta Fazoolin' with my Heart", [flagship_store, new_installment])
 
+## Creating the Arepas Business, Franchise and Menu
+arepas_items = {
+  'arepa pabellon': 7.00, 'pernil arepa': 8.50, 'guayanes arepa': 8.00, 'jamon arepa': 7.50
+}
+arepas_menu = Menu("Arepas", arepas_items, 1000, 2000)
+arepas_place = Franchise("189 Fitzgerald Avenue", arepas_menu)
+arepas_biz = Business("Take a' Arepa", arepas_menu)
 
-
+## Miscelaneous Tests
 print(brunch_menu)
 print(brunch_menu.calculate_bill(["pancakes", "home fries", "coffee"]))
 print(early_bird_menu.calculate_bill(["salumeria plate", "mushroom ravioli (vegan)",]))
+print(flagship_store.available_menus(1200))
+print(flagship_store.available_menus(1700))
+print(arepas_place)
+print(arepas_menu)
